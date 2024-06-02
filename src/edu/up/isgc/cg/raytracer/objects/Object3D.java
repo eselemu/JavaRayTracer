@@ -41,7 +41,7 @@ public abstract class Object3D implements IIntersectable{
     }
 
     public void setShininess(double shininess) {
-        this.shininess = Math.max((Object3D.shininessCap - shininess), 0);
+        this.shininess = Math.max((Object3D.shininessCap - (shininess * Object3D.shininessCap)), 0);
     }
 
     public double getReflectiveness() {

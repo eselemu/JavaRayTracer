@@ -100,11 +100,11 @@ public class Camera extends Object3D {
         double angleMaxX = getFOVHorizontal() / 2.0;
         double radiusMaxX = getDefaultZ() / Math.cos(Math.toRadians(angleMaxX));
 
-        double maxX = Math.cos(Math.toRadians(angleMaxX)) * radiusMaxX;
+        double maxX = Math.sin(Math.toRadians(angleMaxX)) * radiusMaxX;
         double minX = -maxX;
 
         double angleMaxY = getFOVVertical() / 2.0;
-        double radiusMaxY = getDefaultZ() / Math.sin(Math.toRadians(angleMaxY));
+        double radiusMaxY = getDefaultZ() / Math.cos(Math.toRadians(angleMaxY));
 
         double maxY = Math.sin(Math.toRadians(angleMaxY)) * radiusMaxY;
         double minY = -maxY;

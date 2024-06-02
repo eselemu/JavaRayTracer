@@ -20,15 +20,24 @@ public class Raytracer {
     public static int REBOUNDCAP = 4;
     public static double EPSILON = 0.0001;
     public static void main(String[] args) {
+        Color goldColor = new Color(255, 215, 1);
+        Color brownColor = new Color(65, 63, 54);
+        Color blueColor = new Color(68, 107, 235);
+        Color purpleColor = new Color(137, 68, 235);
+        Color backGroundColor = new Color(166, 187, 255);
         System.out.println(new Date());
         Scene scene01 = new Scene();
-        scene01.setCamera(new Camera(new Vector3D(0, 0, -4), 60, 60,
-                800, 800, 0.1, 50.0));
+        scene01.setCamera(new Camera(new Vector3D(0, 0, -4), 64, 36,
+                426, 240, 0.1, 50.0));
         //scene01.addLight(new DirectionalLight(new Vector3D(0.0, -0.3, 1.0), Color.WHITE, 1));
         //scene01.addLight(new PointLight(new Vector3D(0, -1, 0), Color.WHITE, 25));
-        scene01.addLight(new SpotLight(new Vector3D(0, 0, 3), new Vector3D(0, -1, 0), Color.WHITE, 4, 60));
+        //scene01.addLight(new SpotLight(new Vector3D(0, 0, 3), new Vector3D(0, -1, 0), Color.WHITE, 4, 60));
         //scene01.addLight(new AreaLight(new Vector3D(0, 0, 3), new Vector3D(2, 0, 0), new Vector3D(0, 0, 2), new Vector3D(0, -1, 0), Color.WHITE, 15, 64));
-        //scene01.addLight(new PointLight(new Vector3D(0, 0, 0), Color.WHITE, 1));
+        scene01.addLight(new PointLight(new Vector3D(0, 0, 1), Color.WHITE, 5));
+        scene01.addLight(new PointLight(new Vector3D(-5, 9, 6), Color.WHITE, 5));
+        scene01.addLight(new PointLight(new Vector3D(0, 9, 11), Color.WHITE, 5));
+        scene01.addLight(new PointLight(new Vector3D(5, 9, 6), Color.WHITE, 5));
+        scene01.addLight(new PointLight(new Vector3D(0, 0, 10), Color.WHITE, 1));
         //scene01.addObject(new Sphere(new Vector3D(0.5, 1, 8), 0.8, Color.RED));
         //cene01.addObject(new Sphere(new Vector3D(0, -2.5, 3), 0.5, Color.CYAN, 0, 0.8, 0, 0));
         //scene01.addObject(new Sphere(new Vector3D(0, 2.5, 3), 0.5, Color.GREEN, 0, 0, 0, 0));
@@ -36,9 +45,54 @@ public class Raytracer {
                 new Triangle[]{
                         new Triangle(new Vector3D(-6, 0, 0), new Vector3D(6, 0, 0), new Vector3D(-6, 0, 12)),
                         new Triangle(new Vector3D(-6, 0, 12), new Vector3D(6, 0, 0), new Vector3D(6, 0, 12))},
-                Color.YELLOW, 0, 0, 0, 0));
-        Model3D teapot = OBJReader.getModel3D("SmallTeapot.obj", new Vector3D(0, -2.5, 3), Color.CYAN, 0.8, 0.8, 0, 0);
-        scene01.addObject(teapot);
+                backGroundColor, 0, 0, 0, 0));
+        scene01.addObject(new Model3D(new Vector3D(0, 9.4, 0),
+                new Triangle[]{
+                        new Triangle(new Vector3D(-6, 0, 0), new Vector3D(-6, 0, 12), new Vector3D(6, 0, 0)),
+                        new Triangle(new Vector3D(-6, 0, 12), new Vector3D(6, 0, 12), new Vector3D(6, 0, 0))},
+                backGroundColor, 0, 0, 0, 0));
+        scene01.addObject(new Model3D(new Vector3D(-6, -2.6, 0),
+                new Triangle[]{
+                        new Triangle(new Vector3D(0, 0, 0), new Vector3D(0, 0, 12), new Vector3D(0, 12, 0)),
+                        new Triangle(new Vector3D(0, 0, 12), new Vector3D(0, 12, 12), new Vector3D(0, 12, 0))},
+                backGroundColor, 0, 0, 0, 0));
+        scene01.addObject(new Model3D(new Vector3D(6, -2.6, 0),
+                new Triangle[]{
+                        new Triangle(new Vector3D(0, 0, 0), new Vector3D(0, 12, 0), new Vector3D(0, 0, 12)),
+                        new Triangle(new Vector3D(0, 0, 12), new Vector3D(0, 12, 0), new Vector3D(0, 12, 12))},
+                backGroundColor, 0, 0, 0, 0));
+        scene01.addObject(new Model3D(new Vector3D(0, -2.6, 12),
+                new Triangle[]{
+                        new Triangle(new Vector3D(-6, 0, 0), new Vector3D(6, 0, 0), new Vector3D(-6, 12, 0)),
+                        new Triangle(new Vector3D(-6, 12, 0), new Vector3D(6, 0, 0), new Vector3D(6, 12, 0))},
+                backGroundColor, 0, 0, 0, 0));
+        Model3D pillar01 = OBJReader.getModel3D("objPillar90.obj", new Vector3D(3.75, -2.6, 2.25), goldColor, 0.8, 0, 0, 0);
+        pillar01.transform(4, 0, 0, 0);
+        scene01.addObject(pillar01);
+
+        Model3D pillar02 = OBJReader.getModel3D("objPillar90.obj", new Vector3D(-3.75, -2.6, 2.25), goldColor, 0.8, 0, 0, 0);
+        pillar02.transform(4, 0, 0, 0);
+        scene01.addObject(pillar02);
+
+        Model3D altar = OBJReader.getModel3D("objTorch.obj", new Vector3D(0, -2.6, 5), Color.WHITE, 0, 0, 0, 0);
+        altar.transform(0.5, 0, 0, 0);
+        scene01.addObject(altar);
+
+        Model3D cube01 = OBJReader.getModel3D("Cube.obj", new Vector3D(2, 0, 4), purpleColor, 0, 0.8, 0, 0);
+        cube01.transform(1.25, 0, -15, 0);
+        scene01.addObject(cube01);
+
+        Model3D cube02 = OBJReader.getModel3D("Cube.obj", new Vector3D(-2, 0, 4), purpleColor, 0, 0.8, 0, 0);
+        cube02.transform(1.25, 0, 15, 0);
+        scene01.addObject(cube02);
+
+        /*Model3D cube03 = OBJReader.getModel3D("Cube.obj", new Vector3D(3, 1.1, 1), Color.CYAN, 0, 0.8, 1.5, 0);
+        //cube03.transform(0.75, 0, 0, 0);
+        scene01.addObject(cube03);*/
+
+        scene01.addObject(new Sphere(new Vector3D(0, 1.5, 5), 1, goldColor, 0, 0.8, 0, 0));
+
+        scene01.addObject(new Sphere(new Vector3D(0, 0, 2), 0.35, purpleColor, 0, 0.8, 1.5, 0));
 
         //scene01.addObject(OBJReader.getModel3D("Cube.obj", new Vector3D(2, -2, 3), Color.RED, 75, 0.8, 1.5, 0));
         //BufferedImage image = raytrace(scene01);
@@ -165,12 +219,18 @@ public class Raytracer {
         Vector3D lightDirection = Vector3D.normalize(Vector3D.substract(destinyLight.getPosition(), originIntersection.getPosition()));
         Ray ray = new Ray(originIntersection.getPosition(), lightDirection);
         Intersection obstaculeIntersection = raycast(ray, objects, originIntersection.getObject(), clippingPlanes);
+        double distanceToLight = Vector3D.distance(destinyLight.getPosition(), originIntersection.getPosition());
         if(obstaculeIntersection == null)
             return false;
-        if(obstaculeIntersection.getObject().getRefractionIndex() > 0)
-            return isShadowed(obstaculeIntersection, destinyLight, objects, clippingPlanes);
-        else
-            return true;
+        else {
+            double distanceToObstacle = Vector3D.distance(obstaculeIntersection.getPosition(), originIntersection.getPosition());
+            if(distanceToLight < distanceToObstacle)
+                return false;
+            else if(obstaculeIntersection.getObject().getRefractionIndex() > 0)
+                return isShadowed(obstaculeIntersection, destinyLight, objects, clippingPlanes);
+            else
+                return true;
+        }
     }
     public static Color getCombinedLightedColor(Intersection intersection, Light light, List<Object3D> objects, double[] clippingPlanes, Color objColor, Vector3D viewerPosition){
         Color pixelColor = Color.BLACK;
