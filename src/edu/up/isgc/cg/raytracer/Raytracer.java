@@ -35,20 +35,20 @@ public class Raytracer {
         //scene01.addLight(new PointLight(new Vector3D(0, -1, 0), Color.WHITE, 25));
         //scene01.addLight(new SpotLight(new Vector3D(0, 0, 3), new Vector3D(0, -1, 0), Color.WHITE, 4, 60));
         //scene01.addLight(new AreaLight(new Vector3D(0, 0, 3), new Vector3D(2, 0, 0), new Vector3D(0, 0, 2), new Vector3D(0, -1, 0), Color.WHITE, 15, 64));
-        scene01.addLight(new PointLight(new Vector3D(0, 0, -2), Color.WHITE, 12));
+        scene01.addLight(new PointLight(new Vector3D(0, 0, -2), Color.WHITE, 30));
         scene01.addLight(new PointLight(new Vector3D(0, 0, 2.5), Color.WHITE, 2));
         scene01.addLight(new PointLight(new Vector3D(-3.5, -2.5, 1.5), Color.CYAN, 0.5));
-        scene01.addLight(new PointLight(new Vector3D(0, 5, 2.7), Color.CYAN, 5));
+        scene01.addLight(new PointLight(new Vector3D(0, 5, 2.7), Color.CYAN, 2));
         scene01.addLight(new PointLight(new Vector3D(3.5, -2.5, 1.5), Color.CYAN, 0.5));
-        scene01.addLight(new PointLight(new Vector3D(0, -2.5, 3.5), Color.MAGENTA, 4));
+        scene01.addLight(new PointLight(new Vector3D(0, -2.5, 3.5), Color.MAGENTA, 2));
         //scene01.addObject(new Sphere(new Vector3D(0.5, 1, 8), 0.8, Color.RED));
         //cene01.addObject(new Sphere(new Vector3D(0, -2.5, 3), 0.5, Color.CYAN, 0, 0.8, 0, 0));
         //scene01.addObject(new Sphere(new Vector3D(0, 2.5, 3), 0.5, Color.GREEN, 0, 0, 0, 0));
         scene01.addObject(new Model3D(new Vector3D(0, -2.6, 0),
                 new Triangle[]{
-                        new Triangle(new Vector3D(-6, 0, 0), new Vector3D(6, 0, 0), new Vector3D(-6, 0, 12)),
+                        new Triangle(new Vector3D(-6, 0, 0), new Vector3D(6, -1, 0), new Vector3D(-6, 0, 12)),
                         new Triangle(new Vector3D(-6, 0, 12), new Vector3D(6, 0, 0), new Vector3D(6, 0, 12))},
-                backGroundColor, 0, 0.8, 0, 0));
+                backGroundColor, 0, 0, 0, 0));
         scene01.addObject(new Model3D(new Vector3D(0, 9.4, 0),
                 new Triangle[]{
                         new Triangle(new Vector3D(-6, 0, 0), new Vector3D(-6, 0, 12), new Vector3D(6, 0, 0)),
@@ -56,13 +56,13 @@ public class Raytracer {
                 backGroundColor, 0, 0, 0, 0));
         scene01.addObject(new Model3D(new Vector3D(-6, -2.6, 0),
                 new Triangle[]{
-                        new Triangle(new Vector3D(0, 0, 0), new Vector3D(0, 0, 12), new Vector3D(0, 12, 0)),
-                        new Triangle(new Vector3D(0, 0, 12), new Vector3D(0, 12, 12), new Vector3D(0, 12, 0))},
+                        new Triangle(new Vector3D(-2, 0, 0), new Vector3D(0, 0, 12), new Vector3D(2, 12, 0)),
+                        new Triangle(new Vector3D(2, 0, 12), new Vector3D(-2, 12, 12), new Vector3D(0, 12, 0))},
                 backGroundColor, 0, 0, 0, 0));
         scene01.addObject(new Model3D(new Vector3D(6, -2.6, 0),
                 new Triangle[]{
-                        new Triangle(new Vector3D(0, 0, 0), new Vector3D(0, 12, 0), new Vector3D(0, 0, 12)),
-                        new Triangle(new Vector3D(0, 0, 12), new Vector3D(0, 12, 0), new Vector3D(0, 12, 12))},
+                        new Triangle(new Vector3D(2, 0, 0), new Vector3D(0, 12, 0), new Vector3D(0, 0, 12)),
+                        new Triangle(new Vector3D(-2, 0, 12), new Vector3D(0, 12, 0), new Vector3D(0, 12, 12))},
                 backGroundColor, 0, 0, 0, 0));
         scene01.addObject(new Model3D(new Vector3D(0, -2.6, 12),
                 new Triangle[]{
@@ -70,34 +70,34 @@ public class Raytracer {
                         new Triangle(new Vector3D(-6, 12, 0), new Vector3D(6, 0, 0), new Vector3D(6, 12, 0))},
                 backGroundColor, 0, 0, 0, 0));
 
-        Model3D altar = OBJReader.getModel3D("objCil.obj", new Vector3D(0, -1.3, 5), Color.WHITE, 0, 0.8, 0, 0);
-        altar.transform(1.15, 0, 0, 0);
+        Model3D altar = OBJReader.getModel3D("objCil.obj", new Vector3D(0, -1.4, 5), silverColor, 0, 0.8, 0, 0);
+        altar.transform(1.15, 0, 0, -6);
         scene01.addObject(altar);
 
-        Model3D cil02 = OBJReader.getModel3D("objCil.obj", new Vector3D(1.75, -1.6, 4), Color.WHITE, 0, 0.8, 0, 0);
-        cil02.transform(0.85, 0, 0, 0);
+        Model3D cil02 = OBJReader.getModel3D("objCil.obj", new Vector3D(1.75, -1.3, 3), silverColor, 0, 0.8, 0, 0);
+        cil02.transform(0.85, -40, 0, 25);
         scene01.addObject(cil02);
 
-        Model3D cil03 = OBJReader.getModel3D("objCil.obj", new Vector3D(-1.75, -1.6, 4), silverColor, 0, 0.8, 0, 0);
-        cil03.transform(0.85, 0, 0, 0);
+        Model3D cil03 = OBJReader.getModel3D("objCil.obj", new Vector3D(-1.75, -1.7, 4), silverColor, 0, 0.8, 0, 0);
+        cil03.transform(0.85, 0, 0, -5);
         scene01.addObject(cil03);
 
         Model3D pyramid01 = OBJReader.getModel3D("objPyramid02.obj", new Vector3D(3.5, -1.2, 2.5), silverColor, 0.4, 0.4, 0, 0);
-        pyramid01.transform(0.7, 0, 0, 0);
+        pyramid01.transform(0.7, 0, 0, 30);
         scene01.addObject(pyramid01);
-        Model3D pyramid02 = OBJReader.getModel3D("objPyramid02.obj", new Vector3D(3.5, 1.55, 2.5), silverColor, 0.4, 0.4, 0, 0);
-        pyramid02.transform(0.7, 0, 0, 180);
+        Model3D pyramid02 = OBJReader.getModel3D("objPyramid02.obj", new Vector3D(3.5, 1.25, 2.5), silverColor, 0.4, 0.4, 0, 0);
+        pyramid02.transform(0.7, 0, 0, 170);
         scene01.addObject(pyramid02);
 
-        Model3D pyramid03 = OBJReader.getModel3D("objPyramid02.obj", new Vector3D(-3.5, -1.2, 2.5), silverColor, 0.4, 0.4, 0, 0);
-        pyramid03.transform(0.7, 0, 0, 0);
+        Model3D pyramid03 = OBJReader.getModel3D("objPyramid02.obj", new Vector3D(-3.5, -1.4, 2.5), silverColor, 0.4, 0.4, 0, 0);
+        pyramid03.transform(0.7, 0, 0, -10);
         scene01.addObject(pyramid03);
         Model3D pyramid04 = OBJReader.getModel3D("objPyramid02.obj", new Vector3D(-3.5, 1.55, 2.5), silverColor, 0.4, 0.4, 0, 0);
-        pyramid04.transform(0.7, 0, 0, 180);
+        pyramid04.transform(0.7, 0, 0, 175);
         scene01.addObject(pyramid04);
 
         Model3D pyramid05 = OBJReader.getModel3D("objPyramid02.obj", new Vector3D(0, -1.75, 1.5), silverColor, 0.4, 0.4, 0, 0);
-        pyramid05.transform(0.4, 0, 0, 0);
+        pyramid05.transform(0.4, 0, 0, -10);
         scene01.addObject(pyramid05);
 
         /*Model3D cube01 = OBJReader.getModel3D("Cube.obj", new Vector3D(2, 0, 4), purpleColor, 0, 0.8, 0, 0);
@@ -108,13 +108,23 @@ public class Raytracer {
         cube02.transform(1.25, 0, 15, 0);
         scene01.addObject(cube02);*/
 
-        scene01.addObject(new Sphere(new Vector3D(1.75, 0.4, 4), 0.8, silverColor, 0, 0.8, 0, 0));
-        scene01.addObject(new Sphere(new Vector3D(-1.75, 0.4, 4), 0.8, silverColor, 0, 0.8, 0, 0));
-        scene01.addObject(new Sphere(new Vector3D(0, -0.9, 0), 0.2, silverColor, 0, 0.8, 1.5, 0));
-        //scene01.addObject(new Sphere(new Vector3D(0.75, -0.1, 1.5), 0.5, goldColor, 0, 0.8, 1.5, 0));
+        scene01.addObject(new Sphere(new Vector3D(1.2, 0, 1.5), 0.8, silverColor, 0, 0.8, 0, 0));
+        scene01.addObject(new Sphere(new Vector3D(-1.75, 0.3, 4), 0.8, silverColor, 0, 0.8, 0, 0));
+        scene01.addObject(new Sphere(new Vector3D(0, -0.9, -0.2), 0.2, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(3.7, -1.7, 1.5), 0.2, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(-0, 0.5, 2), 0.3, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(3, -1, 2.1), 0.2, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(-2, 1, 0.2), 0.2, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(-2.7, -0.5, 1), 0.3, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(1, -2.3, 2.5), 0.35, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(-2.6, -2.7, 2.5), 0.3, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(1.4, 0, 0), 0.3, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(-0.7, 1.5, 2.5), 0.4, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(1.3, 1.2, 0), 0.3, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
+        scene01.addObject(new Sphere(new Vector3D(-1, 0, 2.8), 0.4, Color.MAGENTA, 0.8, 0.8, 1.5, 0.2));
 
         //scene01.addObject(new Sphere(new Vector3D(0, 1.5, 5), 1, goldColor, 0, 0.8, 0, 0));
-        Model3D skull = OBJReader.getModel3D("objSkull02.obj", new Vector3D(0, 1.65, 5), silverColor, 0.8, 0, 0, 0);
+        Model3D skull = OBJReader.getModel3D("objSkull02.obj", new Vector3D(0, 1.65, 5), silverColor, 0.7, 0, 0, 0);
         skull.transform(0.8, 0, 0, 0);
         scene01.addObject(skull);
 
